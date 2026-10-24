@@ -7,7 +7,7 @@
 ![Minecraft](https://img.shields.io/badge/Minecraft-26.3-62b47a?style=flat-square)
 ![Paper](https://img.shields.io/badge/Platform-Paper-222222?style=flat-square)
 ![Java](https://img.shields.io/badge/Java-25-orange?style=flat-square)
-![Version](https://img.shields.io/badge/Version-1.1.0--beta1-blue?style=flat-square)
+![Version](https://img.shields.io/badge/Version-1.1.0--beta2-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Experimental-yellow?style=flat-square)
 
 *Collect mob trophies, configure drop rates, and make every kill count.*
@@ -127,6 +127,6 @@ terms of use and licensing conditions.
 
 <div align="center">
 
-Made by **JaraSG2** · **SkullDrops** · Version **1.1.0-beta1**
+Made by **JaraSG2** · **SkullDrops**
 
 </div>
