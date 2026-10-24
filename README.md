@@ -98,7 +98,9 @@ Bug reports and pull requests are welcome. Please include your Paper version, re
 
 ## 🙏 Credits
 
-Mob head textures are provided by **[Minecraft-Heads.com](https://minecraft-heads.com/)** and are subject to their API terms and attribution requirements.
+Mob head textures are provided by [Minecraft-Heads.com](https://minecraft-heads.com/) and are subject to their API terms and attribution requirements.
+
+[![Minecraft-Heads](docs/images/minecraft-heads_fullbanner_468x60.png)](https://minecraft-heads.com/)
 
 ## 📄 License
 
