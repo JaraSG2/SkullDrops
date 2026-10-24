@@ -832,7 +832,7 @@ head-lore:
 minecraft-heads:
   enabled: true
   app-uuid: "ee5fedf9-29de-49c4-9b0e-8d5527648829"
-  api-key-parameter: "api_key" # Confirm parameter name against Minecraft-Heads API v2 docs
+  demo: false # Development only: limited test data; do not enable for normal servers
   start-page: 1
   max-pages: 10 # legacy setting; startup synchronization processes one page
   page-delay-ms: 10000 # delay for future multi-page startup synchronization

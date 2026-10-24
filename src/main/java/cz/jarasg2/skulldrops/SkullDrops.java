@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.profile.PlayerProfile;
 import org.bukkit.profile.PlayerTextures;
+import org.bstats.bukkit.Metrics;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -52,6 +53,8 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
 
     @Override public void onEnable() {
         saveDefaultConfig();
+        // bStats collects standard anonymous server statistics; no custom charts.
+        new Metrics(this, 34914);
         loadSecrets();
         apiCacheFile = new File(getDataFolder(), "minecraft-heads-cache.yml");
         apiCache = YamlConfiguration.loadConfiguration(apiCacheFile);
@@ -189,34 +192,33 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
         // A single page per run prevents bursts and keeps all HTTP work off the server thread.
         final int maxPages = 1;
         final int firstPage = Math.max(1, getConfig().getInt("minecraft-heads.start-page", 1));
+        final boolean demoRequested = getConfig().getBoolean("minecraft-heads.demo", false);
         final int savedPage = apiCache.getInt("sync.next-page", firstPage);
-        if (savedPage == -1) {
+        // Demo requests always start at page 1 and never change production scan progress.
+        if (!demoRequested && savedPage == -1) {
             catalogLoading = false;
             catalogReady = false;
             getLogger().info("API catalog already scanned to the end. Existing texture mappings remain cached.");
             return;
         }
-        final int startPage = Math.max(firstPage, savedPage);
+        final int startPage = demoRequested ? 1 : Math.max(firstPage, savedPage);
+        if (demoRequested) getLogger().info(
+                "Minecraft-Heads demo scan starts at page 1; production cursor and cached textures are preserved.");
         final int category = getConfig().getInt("minecraft-heads.category-id", 0);
         final String licenseKey = secrets.getString("minecraft-heads.api-key", "").trim();
         getLogger().info("Minecraft-Heads license key: " + (licenseKey.isEmpty() ? "not configured" : "configured")
                 + "; requesting page " + startPage + ". Secret value will not be logged.");
-        // The provider's exact credential parameter must be confirmed against API v2 documentation.
-        final String keyParameter = getConfig().getString("minecraft-heads.api-key-parameter", "api_key");
-        if (!licenseKey.isEmpty() && !keyParameter.matches("[a-zA-Z][a-zA-Z0-9_]{0,40}")) {
-            catalogLoading = false;
-            getLogger().warning("Invalid Minecraft-Heads API key parameter name in config.yml.");
-            return;
-        }
+        // API v2: App UUID is mandatory; a server owner's API key is optional.
+        // Documentation specifies the API key as a request header, not a URL parameter.
         final long pause = Math.max(1000, getConfig().getLong("minecraft-heads.page-delay-ms", 10000));
         java.util.concurrent.CompletableFuture.runAsync(() -> {
             Map<String, String> matched = new HashMap<>();
             List<CatalogEntry> entries = new ArrayList<>();
             Set<String> seenPages = new HashSet<>();
-            final String previousSignature = apiCache.getString("sync.last-page-signature", "");
+            final String previousSignature = demoRequested ? "" : apiCache.getString("sync.last-page-signature", "");
             String lastSignature = previousSignature;
             Set<String> remaining = new HashSet<>(wanted.keySet());
-            int fetched = 0, nextPage = startPage, retries = 0;
+            int fetched = 0, nextPage = startPage;
             boolean exhausted = false;
             String failure = null;
             for (int page = startPage; page < startPage + maxPages && !remaining.isEmpty(); page++) {
@@ -224,11 +226,12 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
                     String url = "https://minecraft-heads.com/api/heads/custom-heads?app_uuid="
                             + URLEncoder.encode(app, StandardCharsets.UTF_8) + "&page=" + page;
                     if (category > 0) url += "&category_id=" + category;
-                    if (!licenseKey.isEmpty()) url += "&" + keyParameter + "="
-                            + URLEncoder.encode(licenseKey, StandardCharsets.UTF_8);
-                    HttpRequest request = HttpRequest.newBuilder(URI.create(url))
+                    if (demoRequested) url += "&demo=true";
+                    HttpRequest.Builder requestBuilder = HttpRequest.newBuilder(URI.create(url))
                             .timeout(Duration.ofSeconds(30)).header("Accept", "application/json")
-                            .header("User-Agent", "SkullDrops/1.1 (Paper plugin)").GET().build();
+                            .header("User-Agent", "SkullDrops/1.1 (Paper plugin)");
+                    if (!licenseKey.isEmpty()) requestBuilder.header("api-key", licenseKey);
+                    HttpRequest request = requestBuilder.GET().build();
                     HttpResponse<String> response = apiHttp.send(request, HttpResponse.BodyHandlers.ofString());
                     if (response.statusCode() == 429) {
                         long waitMs = Math.max(60000L, pause * 6);
@@ -249,35 +252,50 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
                         failure = "HTTP " + response.statusCode() + " on page " + page;
                         break;
                     }
-                    retries = 0;
                     JsonObject root = JsonParser.parseString(response.body()).getAsJsonObject();
                     JsonObject meta = root.has("meta") && root.get("meta").isJsonObject()
                             ? root.getAsJsonObject("meta") : null;
+                    boolean limitedResponse = false;
                     if (meta != null) {
-                        String demo = meta.has("demo_mode") ? meta.get("demo_mode").toString() : "unknown";
-                        String limited = meta.has("data_limited") ? meta.get("data_limited").toString() : "unknown";
-                        getLogger().info("Minecraft-Heads page " + page + " metadata: demo_mode=" + demo
-                                + ", data_limited=" + limited + ", key=" + (licenseKey.isEmpty() ? "not configured" : "configured"));
-                        if ("true".equalsIgnoreCase(limited) || "true".equalsIgnoreCase(demo)) {
-                            failure = "Provider reports limited/demo data on page " + page;
-                            break;
+                        boolean demoMode = meta.has("demo_mode") && !meta.get("demo_mode").isJsonNull()
+                                && meta.get("demo_mode").getAsBoolean();
+                        limitedResponse = meta.has("data_limited") && !meta.get("data_limited").isJsonNull()
+                                && meta.get("data_limited").getAsBoolean();
+                        String license = meta.has("license") && !meta.get("license").isJsonNull()
+                                ? meta.get("license").getAsString() : "unknown";
+                        getLogger().info("Minecraft-Heads page " + page + ": demo_mode=" + demoMode
+                                + ", data_limited=" + limitedResponse + ", license=" + license);
+                        limitedResponse = limitedResponse || demoMode;
+                        if (limitedResponse) getLogger().warning(
+                                "Minecraft-Heads returned limited/demo data. Available textures will be cached, "
+                                + "but this response is not a complete catalog. Check app activation and license.");
+                    }
+                    if (root.has("warnings") && root.get("warnings").isJsonArray()) {
+                        for (JsonElement warning : root.getAsJsonArray("warnings")) {
+                            // Do not log arbitrary full responses or credentials.
+                            String message = warning.isJsonPrimitive() ? warning.getAsString() : warning.toString();
+                            String safeMessage = message.replaceAll("[\r\n]", " ");
+                            getLogger().warning("Minecraft-Heads API warning: "
+                                    + safeMessage.substring(0, Math.min(300, safeMessage.length())));
                         }
-                    } else {
-                        getLogger().info("Minecraft-Heads page " + page + ": no meta object; key="
-                                + (licenseKey.isEmpty() ? "not configured" : "configured"));
                     }
                     JsonArray data = root.getAsJsonArray("data");
                     if (data == null) { failure = "Missing data on page " + page; break; }
-                    if (data.isEmpty()) { exhausted = true; break; }
+                    if (data.isEmpty()) {
+                        if (limitedResponse) failure = "Limited API returned no heads on page " + page;
+                        else exhausted = true;
+                        break;
+                    }
                     String signature = data.toString();
                     String pageSignature = Integer.toHexString(signature.hashCode()) + ":" + signature.length();
                     if (pageSignature.equals(previousSignature) || !seenPages.add(pageSignature)) {
                         failure = "Repeated API page " + page + " (" + data.size() + " entries; possible ignored pagination or limited catalog)";
                         break;
                     }
-                    lastSignature = pageSignature;
+                    if (!limitedResponse) lastSignature = pageSignature;
                     fetched++;
-                    nextPage = page + 1;
+                    // A limited response must never advance the full-catalog cursor.
+                    nextPage = limitedResponse ? page : page + 1;
                     for (JsonElement element : data) {
                         if (!element.isJsonObject()) continue;
                         JsonObject item = element.getAsJsonObject();
@@ -300,14 +318,21 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
                     // Commit each successful page so a crash/restart never discards scan progress.
                     final int checkpoint = nextPage;
                     final String checkpointSignature = lastSignature;
+                    final boolean checkpointLimited = limitedResponse;
                     final Map<String, String> checkpointMatches = Map.copyOf(matched);
                     getServer().getScheduler().runTask(this, () -> {
                         for (var entry : checkpointMatches.entrySet())
                             apiCache.set(entry.getKey() + ".url", entry.getValue());
-                        apiCache.set("sync.next-page", checkpoint);
-                        apiCache.set("sync.last-page-signature", checkpointSignature);
+                        if (!demoRequested) {
+                            apiCache.set("sync.next-page", checkpoint);
+                            if (!checkpointLimited) apiCache.set("sync.last-page-signature", checkpointSignature);
+                        }
                         saveApiCache();
                     });
+                    if (limitedResponse) {
+                        failure = "Limited/demo response on page " + page + "; waiting for next startup/reload";
+                        break;
+                    }
                     if (!remaining.isEmpty()) Thread.sleep(pause);
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt(); failure = "Interrupted"; break;
@@ -325,8 +350,10 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
                 for (var entry : matched.entrySet())
                     apiCache.set(entry.getKey() + ".url", entry.getValue());
                 // A full scan ends at an empty page. Do not endlessly restart from page 1.
-                apiCache.set("sync.next-page", end ? -1 : cursor);
-                if (pages > 0) apiCache.set("sync.last-page-signature", finalSignature);
+                if (!demoRequested) {
+                    apiCache.set("sync.next-page", end ? -1 : cursor);
+                    if (pages > 0) apiCache.set("sync.last-page-signature", finalSignature);
+                }
                 saveApiCache();
                 catalogLoading = false;
                 catalogReady = complete;
@@ -411,7 +438,7 @@ public final class SkullDrops extends JavaPlugin implements Listener, CommandExe
 
     private void requestApiTexture(String type, String variant) {
         if (!getConfig().getBoolean("minecraft-heads.enabled", true)) return;
-        if (headCatalog.isEmpty()) { refreshCatalog(); return; }
+        // API requests are only initiated during startup or explicit /sd reload.
         String key = cacheKey(type, variant);
         if (apiCache.contains(key + ".url")) return;
         for (String name : apiNames(type, variant)) {

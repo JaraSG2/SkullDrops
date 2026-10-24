@@ -92,6 +92,18 @@ Mob head textures are resolved through [Minecraft-Heads.com](https://minecraft-h
 - Minecraft-Heads may return limited data if the application is inactive or API access is restricted.
 - API synchronization and some special drops are still being tested.
 
+## 📊 Statistics
+
+SkullDrops uses [bStats](https://bstats.org/) to collect anonymous plugin usage statistics.
+
+<p>
+  <a href="https://bstats.org/plugin/bukkit/SkullDrops/34914">
+    <img src="https://bstats-graph.gritter.nl/v1/plugins/34914/charts/servers/chart.png?theme=dark" alt="SkullDrops Server Statistics" width="400" />
+  </a>
+</p>
+
+View more statistics on [bStats](https://bstats.org/plugin/bukkit/SkullDrops/34914).
+
 ## 🤝 Contributing
 
 Bug reports and pull requests are welcome. Please include your Paper version, relevant logs, and steps to reproduce the issue.
