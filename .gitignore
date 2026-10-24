@@ -1,0 +1,12 @@
+.gradle/
+build/
+.idea/
+*.iml
+run/
+
+secrets.yml
+**/secrets.yml
+
+# Local API cache and server state
+**/minecraft-heads-cache.yml
+**/plugins/SkullDrops/config.yml

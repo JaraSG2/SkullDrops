@@ -1,0 +1,845 @@
+# SkullDrops beta.5 – drop rates retained from supplied config(1).yml
+# null inherits the parent chance. Variant textures require a verified texture entry.
+settings:
+  require-player-kill: true
+  looting-extra-per-level: 0.001
+  baby-chance-multiplier: 1.0
+  drop-in-creative: false
+players:
+  enabled: true
+  chance: 10.0
+heart:
+  enabled: true
+  chance: 1.0
+  ignore-silk-touch: true
+  prevent-replaced-farming: true
+copper-statue:
+  enabled: true
+  chance: 1.0
+  ignore-silk-touch: true
+  prevent-replaced-farming: true
+creatures:
+  ALLAY:
+    enabled: true
+    chance: 63.0
+    baby-chance: null
+  ARMADILLO:
+    enabled: true
+    chance: 5.0
+    baby-chance: null
+  AXOLOTL:
+    enabled: true
+    chance: 21.0
+    baby-chance: null
+    variants:
+      BLUE:
+        chance: null
+        baby-chance: null
+      CYAN:
+        chance: null
+        baby-chance: null
+      GOLD:
+        chance: null
+        baby-chance: null
+      LUCY:
+        chance: null
+        baby-chance: null
+      WILD:
+        chance: null
+        baby-chance: null
+  BAT:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  BEE:
+    enabled: true
+    chance: 21.0
+    baby-chance: null
+    variants:
+      ANGRY:
+        chance: null
+        baby-chance: null
+      ANGRY_POLLINATED:
+        chance: null
+        baby-chance: null
+      POLLINATED:
+        chance: null
+        baby-chance: null
+  BLAZE:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  BOGGED:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  BREEZE:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  CAMEL:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  CAMEL_HUSK:
+    enabled: true
+    chance: 0.0
+    baby-chance: null
+  CAT:
+    enabled: true
+    chance: 21.0
+    baby-chance: null
+    variants:
+      ALL_BLACK:
+        chance: null
+        baby-chance: null
+      BRITISH_SHORTHAIR:
+        chance: null
+        baby-chance: null
+      CALICO:
+        chance: null
+        baby-chance: null
+      RED:
+        chance: null
+        baby-chance: null
+      JELLIE:
+        chance: null
+        baby-chance: null
+      PERSIAN:
+        chance: null
+        baby-chance: null
+      RAGDOLL:
+        chance: null
+        baby-chance: null
+      SIAMESE:
+        chance: null
+        baby-chance: null
+      TABBY:
+        chance: null
+        baby-chance: null
+      BLACK:
+        chance: null
+        baby-chance: null
+      WHITE:
+        chance: null
+        baby-chance: null
+  CAVE_SPIDER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  CHICKEN:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      COLD:
+        chance: null
+        baby-chance: null
+      TEMPERATE:
+        chance: null
+        baby-chance: null
+      WARM:
+        chance: null
+        baby-chance: null
+  COD:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  COPPER_GOLEM:
+    enabled: true
+    chance: 5.0
+    baby-chance: null
+    variants:
+      EXPOSED:
+        chance: null
+        baby-chance: null
+      OXIDIZED:
+        chance: null
+        baby-chance: null
+      WEATHERED:
+        chance: null
+        baby-chance: null
+  COW:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      COLD:
+        chance: null
+        baby-chance: null
+      TEMPERATE:
+        chance: null
+        baby-chance: null
+      WARM:
+        chance: null
+        baby-chance: null
+  CREAKING:
+    enabled: false
+    chance: 10.0
+    baby-chance: null
+  CREEPER:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+    variants:
+      CHARGED:
+        chance: null
+        baby-chance: null
+  DOLPHIN:
+    enabled: true
+    chance: 27.0
+    baby-chance: null
+  DONKEY:
+    enabled: true
+    chance: 27.0
+    baby-chance: null
+  DROWNED:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  ELDER_GUARDIAN:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  ENDERMAN:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  ENDERMITE:
+    enabled: true
+    chance: 5.0
+    baby-chance: null
+  EVOKER:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  FOX:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+    variants:
+      SNOW:
+        chance: null
+        baby-chance: null
+  FROG:
+    enabled: true
+    chance: 20.0
+    baby-chance: null
+    variants:
+      COLD:
+        chance: null
+        baby-chance: null
+      TEMPERATE:
+        chance: null
+        baby-chance: null
+      WARM:
+        chance: null
+        baby-chance: null
+  GHAST:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  GLOW_SQUID:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  GOAT:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+    variants:
+      SCREAMING:
+        chance: null
+        baby-chance: null
+  GUARDIAN:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  HAPPY_GHAST:
+    enabled: true
+    chance: 10.0
+    baby-chance: null
+  HOGLIN:
+    enabled: true
+    chance: 6.0
+    baby-chance: null
+  HORSE:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+    variants:
+      BLACK:
+        chance: null
+        baby-chance: null
+      BROWN:
+        chance: null
+        baby-chance: null
+      CHESTNUT:
+        chance: null
+        baby-chance: null
+      CREAMY:
+        chance: null
+        baby-chance: null
+      DARK_BROWN:
+        chance: null
+        baby-chance: null
+      GRAY:
+        chance: null
+        baby-chance: null
+      WHITE:
+        chance: null
+        baby-chance: null
+  HUSK:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  ILLUSIONER:
+    enabled: true
+    chance: 100.0
+    baby-chance: null
+  IRON_GOLEM:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  LLAMA:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+    variants:
+      BROWN:
+        chance: null
+        baby-chance: null
+      CREAMY:
+        chance: null
+        baby-chance: null
+      GRAY:
+        chance: null
+        baby-chance: null
+      WHITE:
+        chance: null
+        baby-chance: null
+  MAGMA_CUBE:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  MOOSHROOM:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      BROWN:
+        chance: null
+        baby-chance: null
+      RED:
+        chance: null
+        baby-chance: null
+  MULE:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  NAUTILUS:
+    enabled: true
+    chance: 10.0
+    baby-chance: null
+    variants:
+      NAUTILUS_SHELL:
+        chance: null
+        baby-chance: null
+  OCELOT:
+    enabled: true
+    chance: 21.0
+    baby-chance: null
+  PANDA:
+    enabled: true
+    chance: 27.0
+    baby-chance: null
+    variants:
+      AGGRESSIVE:
+        chance: null
+        baby-chance: null
+      BROWN:
+        chance: null
+        baby-chance: null
+      LAZY:
+        chance: null
+        baby-chance: null
+      PLAYFUL:
+        chance: null
+        baby-chance: null
+      WEAK:
+        chance: null
+        baby-chance: null
+      WORRIED:
+        chance: null
+        baby-chance: null
+  PARCHED:
+    enabled: true
+    chance: 6.0
+    baby-chance: null
+  PARROT:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+    variants:
+      BLUE:
+        chance: null
+        baby-chance: null
+      GRAY:
+        chance: null
+        baby-chance: null
+      GREEN:
+        chance: null
+        baby-chance: null
+      LIGHT_BLUE:
+        chance: null
+        baby-chance: null
+      RED:
+        chance: null
+        baby-chance: null
+  PHANTOM:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  PIG:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      COLD:
+        chance: null
+        baby-chance: null
+      TEMPERATE:
+        chance: null
+        baby-chance: null
+      WARM:
+        chance: null
+        baby-chance: null
+  PIGLIN_BRUTE:
+    enabled: true
+    chance: 10.0
+    baby-chance: null
+  PILLAGER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  POLAR_BEAR:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  PUFFERFISH:
+    enabled: true
+    chance: 6.0
+    baby-chance: null
+  RABBIT:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+    variants:
+      BLACK_AND_WHITE:
+        chance: null
+        baby-chance: null
+      BLACK:
+        chance: null
+        baby-chance: null
+      BROWN:
+        chance: null
+        baby-chance: null
+      GOLD:
+        chance: null
+        baby-chance: null
+      SALT_AND_PEPPER:
+        chance: null
+        baby-chance: null
+      THE_KILLER_BUNNY:
+        chance: null
+        baby-chance: null
+      TOAST:
+        chance: null
+        baby-chance: null
+      WHITE:
+        chance: null
+        baby-chance: null
+  RAVAGER:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  SALMON:
+    enabled: true
+    chance: 5.0
+    baby-chance: null
+    variants:
+      SMALL:
+        chance: null
+        baby-chance: null
+      MEDIUM:
+        chance: null
+        baby-chance: null
+      LARGE:
+        chance: null
+        baby-chance: null
+  SHULKER:
+    enabled: true
+    chance: 5.0
+    baby-chance: null
+    variants:
+      WHITE:
+        chance: null
+        baby-chance: null
+      ORANGE:
+        chance: null
+        baby-chance: null
+      MAGENTA:
+        chance: null
+        baby-chance: null
+      LIGHT_BLUE:
+        chance: null
+        baby-chance: null
+      YELLOW:
+        chance: null
+        baby-chance: null
+      LIME:
+        chance: null
+        baby-chance: null
+      PINK:
+        chance: null
+        baby-chance: null
+      GRAY:
+        chance: null
+        baby-chance: null
+      LIGHT_GRAY:
+        chance: null
+        baby-chance: null
+      CYAN:
+        chance: null
+        baby-chance: null
+      PURPLE:
+        chance: null
+        baby-chance: null
+      BLUE:
+        chance: null
+        baby-chance: null
+      BROWN:
+        chance: null
+        baby-chance: null
+      GREEN:
+        chance: null
+        baby-chance: null
+      RED:
+        chance: null
+        baby-chance: null
+      BLACK:
+        chance: null
+        baby-chance: null
+  SILVERFISH:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  SKELETON_HORSE:
+    enabled: true
+    chance: 15.0
+    baby-chance: null
+  SLIME:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  SNIFFER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  SNOW_GOLEM:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  SPIDER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  SQUID:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  STRAY:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  STRIDER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      COLD:
+        chance: null
+        baby-chance: null
+  TADPOLE:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+  TRADER_LLAMA:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+    variants:
+      BROWN:
+        chance: null
+        baby-chance: null
+      CREAMY:
+        chance: null
+        baby-chance: null
+      GRAY:
+        chance: null
+        baby-chance: null
+      WHITE:
+        chance: null
+        baby-chance: null
+  TROPICAL_FISH:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  TURTLE:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  VEX:
+    enabled: true
+    chance: 3.0
+    baby-chance: null
+  VILLAGER:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+    variants:
+      ARMORER:
+        chance: null
+        baby-chance: null
+      BUTCHER:
+        chance: null
+        baby-chance: null
+      CARTOGRAPHER:
+        chance: null
+        baby-chance: null
+      CLERIC:
+        chance: null
+        baby-chance: null
+      FARMER:
+        chance: null
+        baby-chance: null
+      FISHERMAN:
+        chance: null
+        baby-chance: null
+      FLETCHER:
+        chance: null
+        baby-chance: null
+      LEATHERWORKER:
+        chance: null
+        baby-chance: null
+      LIBRARIAN:
+        chance: null
+        baby-chance: null
+      MASON:
+        chance: null
+        baby-chance: null
+      NITWIT:
+        chance: null
+        baby-chance: null
+      SHEPHERD:
+        chance: null
+        baby-chance: null
+      TOOLSMITH:
+        chance: null
+        baby-chance: null
+      WEAPONSMITH:
+        chance: null
+        baby-chance: null
+  VINDICATOR:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+  WANDERING_TRADER:
+    enabled: true
+    chance: 20.0
+    baby-chance: null
+  WARDEN:
+    enabled: true
+    chance: 15.0
+    baby-chance: null
+  WITCH:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+  WITHER:
+    enabled: true
+    chance: 25.0
+    baby-chance: null
+    variants:
+      BLUE_WITHER_PROJECTILE:
+        chance: null
+        baby-chance: null
+      WITHER_PROJECTILE:
+        chance: null
+        baby-chance: null
+  WOLF:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+    variants:
+      ANGRY_ASHEN:
+        chance: null
+        baby-chance: null
+      ANGRY_BLACK:
+        chance: null
+        baby-chance: null
+      ANGRY_CHESTNUT:
+        chance: null
+        baby-chance: null
+      ANGRY_PALE:
+        chance: null
+        baby-chance: null
+      ANGRY_RUSTY:
+        chance: null
+        baby-chance: null
+      ANGRY_SNOWY:
+        chance: null
+        baby-chance: null
+      ANGRY_SPOTTED:
+        chance: null
+        baby-chance: null
+      ANGRY_STRIPED:
+        chance: null
+        baby-chance: null
+      ANGRY_WOODS:
+        chance: null
+        baby-chance: null
+      ASHEN:
+        chance: null
+        baby-chance: null
+      BLACK:
+        chance: null
+        baby-chance: null
+      CHESTNUT:
+        chance: null
+        baby-chance: null
+      PALE:
+        chance: null
+        baby-chance: null
+      RUSTY:
+        chance: null
+        baby-chance: null
+      SNOWY:
+        chance: null
+        baby-chance: null
+      SPOTTED:
+        chance: null
+        baby-chance: null
+      STRIPED:
+        chance: null
+        baby-chance: null
+      WOODS:
+        chance: null
+        baby-chance: null
+  ZOGLIN:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+  ZOMBIE_HORSE:
+    enabled: true
+    chance: 100.0
+    baby-chance: null
+  ZOMBIE_NAUTILUS:
+    enabled: true
+    chance: 10.0
+    baby-chance: null
+    variants:
+      CORAL_ZOMBIE_NAUTILUS_SHELL:
+        chance: null
+        baby-chance: null
+      TEMPERATE_ZOMBIE_NAUTILUS_SHELL:
+        chance: null
+        baby-chance: null
+      CORAL:
+        chance: null
+        baby-chance: null
+      TEMPERATE:
+        chance: null
+        baby-chance: null
+  ZOMBIE_VILLAGER:
+    enabled: true
+    chance: 2.0
+    baby-chance: null
+    variants:
+      ZOMBIE_ARMORER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_BUTCHER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_CARTOGRAPHER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_CLERIC:
+        chance: null
+        baby-chance: null
+      ZOMBIE_FARMER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_FISHERMAN:
+        chance: null
+        baby-chance: null
+      ZOMBIE_FLETCHER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_LEATHERWORKER:
+        chance: null
+        baby-chance: null
+      ZOMBIE_LIBRARIAN:
+        chance: null
+        baby-chance: null
+      ZOMBIE_MASON:
+        chance: null
+        baby-chance: null
+      ZOMBIE_NITWIT:
+        chance: null
+        baby-chance: null
+      ZOMBIE_SHEPHERD:
+        chance: null
+        baby-chance: null
+      ZOMBIE_TOOLSMITH:
+        chance: null
+        baby-chance: null
+      ZOMBIE_WEAPONSMITH:
+        chance: null
+        baby-chance: null
+      ZOMBIE_NONE:
+        chance: null
+        baby-chance: null
+  ZOMBIFIED_PIGLIN:
+    enabled: true
+    chance: 1.0
+    baby-chance: null
+head-lore:
+  enabled: true
+  timezone: Europe/Prague
+  date-format: dd.MM.yyyy HH:mm:ss
+  lines:
+  - '&7Killed by &f{KILLER}'
+  - '&7Victim &f{VICTIM}'
+  - '&7Variant &f{VARIANT}'
+  - '&7Age &f{AGE}'
+  - '&7Killed on &f{DATE}'
+
+# Minecraft-Heads API v2: public app UUID only, no private API key needed
+# for the basic access mode (subject to provider limits and availability).
+# If the API has no exact matching texture, no custom mob head drops.
+minecraft-heads:
+  enabled: true
+  app-uuid: "ee5fedf9-29de-49c4-9b0e-8d5527648829"
+  api-key-parameter: "api_key" # Confirm parameter name against Minecraft-Heads API v2 docs
+  start-page: 1
+  max-pages: 10 # legacy setting; startup synchronization processes one page
+  page-delay-ms: 10000 # delay for future multi-page startup synchronization
+  category-id: 0
+
+
+# Targeted sync scans API pages only until configured mob textures are found.
+# Existing matches are stored in minecraft-heads-cache.yml and survive restarts.
+# Startup/reload requests one page, resuming from sync.next-page on next reload.
+# A fully scanned API does not guarantee every mob variant exists.

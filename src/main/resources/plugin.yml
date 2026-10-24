@@ -1,0 +1,14 @@
+name: SkullDrops
+version: 1.1.0-beta1
+main: cz.jarasg2.skulldrops.SkullDrops
+api-version: "26.3"
+author: JaraSG2
+description: Configurable mob, baby, player and Creaking Heart head drops
+commands:
+  skulldrops:
+    description: Manage SkullDrops
+    aliases: [sd]
+    permission: skulldrops.admin
+permissions:
+  skulldrops.admin:
+    default: op
