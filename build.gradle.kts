@@ -3,7 +3,7 @@ plugins {
     id("com.gradleup.shadow") version "9.2.2"
 }
 group = "cz.jarasg2"
-version = "1.1.0-beta1"
+version = "1.1.0-beta2"
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
